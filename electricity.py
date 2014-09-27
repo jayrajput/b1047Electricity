@@ -1,24 +1,24 @@
 #!/usr/bin/python
 
 # This comes from the motor meter
-motorPrev=368
-motorCurr=396
-motorPrevDate="22/03/14"
-motorCurrDate="21/05/14"
+motorCurr=436
+motorPrev=396
+motorCurrDate="22/03/14"
+motorPrevDate="21/05/14"
 
 # This comes from the FF meter
-ffPrev=5835
-ffCurr=5937
-ffPrevDate="22/03/14"
-ffCurrDate="21/05/14"
+ffCurr=6239
+ffPrev=5937
+ffCurrDate="18/07/14"
+ffPrevDate="21/05/14"
 
 # This comes from the bill
-mainCurr=36922
-mainPrev=36499
-mainPrevDate="21/03/14"
-mainCurrDate="19/05/14"
-money = 2083
-unit = 423
+mainPrev=36922
+mainCurr=37900
+mainCurrDate="18/07/14"
+mainPrevDate="19/05/14"
+money = 5456
+unit = 978
  
  
 msg='''
