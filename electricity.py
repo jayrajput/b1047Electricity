@@ -1,25 +1,39 @@
 #!/usr/bin/python
 
-# This comes from the motor meter
-motorCurr=436
-motorPrev=396
-motorCurrDate="22/03/14"
-motorPrevDate="21/05/14"
+class Reading(object):
+    def __init__(self, valCurr, valPrev, dateCurr, datePrev):
+        self.valCurr  = valCurr
+        self.valPrev  = valPrev
+        self.dateCurr = dateCurr
+        self.datePrev = datePrev
+        self.valConsumed  = valCurr - valPrev
+
+# This comes from the water motor reading
+motor = Reading(
+    valPrev  = 436,
+    valCurr  = 472,
+    datePrev = "18/07/14",
+    dateCurr = "27/09/14"
+)
 
 # This comes from the FF meter
-ffCurr=6239
-ffPrev=5937
-ffCurrDate="18/07/14"
-ffPrevDate="21/05/14"
+ff = Reading(
+    valPrev  = 6239,
+    valCurr  = 6472,
+    datePrev = "18/07/14",
+    dateCurr = "27/09/14"
+)
 
 # This comes from the bill
-mainPrev=36922
-mainCurr=37900
-mainCurrDate="18/07/14"
-mainPrevDate="19/05/14"
-money = 5456
-unit = 978
- 
+main = Reading(
+    valPrev  = 37900,
+    valCurr  = 38645,
+    datePrev = "18/07/14",
+    dateCurr = "23/09/14",
+)
+
+money = 4049
+unit  = 745
  
 msg='''
  
@@ -58,28 +72,32 @@ TotalUnits * PerUnit = MoneyDue
 {ffTotalConsumed} * {perUnit} = {moneyDue}
 '''
  
-ffConsumed = ffCurr - ffPrev
-perUnit = money/float(unit)
-perHeadMotor = (motorCurr - motorPrev)/float(2)
-ffTotalConsumed = ffConsumed + perHeadMotor
+perUnit         = money/float(unit)
+perHeadMotor    = motor.valConsumed/2.0
+ffTotalConsumed = ff.valConsumed + perHeadMotor
+
 print msg.format(
-    mainCurr = mainCurr,
-    mainCurrDate = mainCurrDate,
-    mainPrev = mainPrev,
-    mainPrevDate = mainPrevDate,
-    money = money,
-    unit  = unit,
-    perUnit = perUnit,
-    motorCurr = motorCurr,
-    motorPrev = motorPrev,
-    motorCurrDate = motorCurrDate,
-    motorPrevDate = motorPrevDate,
-    perHeadMotor = perHeadMotor,
-    ffCurr = ffCurr,
-    ffPrev = ffPrev,
-    ffCurrDate = ffCurrDate,
-    ffPrevDate = ffPrevDate,
-    ffConsumed = ffConsumed,
-    ffTotalConsumed = ffConsumed + perHeadMotor,
-    moneyDue = ffTotalConsumed * perUnit
+    mainCurr        = main.valCurr,
+    mainPrev        = main.valPrev,
+    mainCurrDate    = main.dateCurr,
+    mainPrevDate    = main.datePrev,
+
+    motorCurr       = motor.valCurr,
+    motorPrev       = motor.valPrev,
+    motorCurrDate   = motor.dateCurr,
+    motorPrevDate   = motor.datePrev,
+
+    ffCurr          = ff.valCurr,
+    ffPrev          = ff.valPrev,
+    ffCurrDate      = ff.dateCurr,
+    ffPrevDate      = ff.datePrev,
+
+    money           = money,
+    unit            = unit,
+    perUnit         = perUnit,
+
+    perHeadMotor    = perHeadMotor,
+    ffConsumed      = ff.valConsumed,
+    ffTotalConsumed = ff.valConsumed + perHeadMotor,
+    moneyDue        = ffTotalConsumed * perUnit
 )
